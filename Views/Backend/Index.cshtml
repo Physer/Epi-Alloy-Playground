@@ -1,17 +1,33 @@
-﻿@{
+﻿@using EPiServer.Framework.Web.Resources
+@using EPiServer.Shell.Navigation
+
+@{ 
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>Back-end menu item</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+    <!-- Shell -->
+    @Html.Raw(ClientResources.RenderResources("ShellCore"))
+    @Html.Raw(ClientResources.RenderResources("ShellWidgets"))
+
+    <!-- LightTheme -->
+    @Html.Raw(ClientResources.RenderResources("ShellCoreLightTheme"))
+
+    <!-- Dojo Dashboard -->
+    @Html.Raw(ClientResources.RenderResources("DojoDashboardCompatibility", new[] { ClientResourceType.Style }))
+
 </head>
 <body>
-    <div>
-        <p>The secret back-end panel, outside of Episerver</p>
+    @Html.Raw(Html.ShellInitializationScript())
+    @Html.Raw(Html.CreatePlatformNavigationMenu())
+    <div @Html.Raw(Html.ApplyPlatformNavigation())>
+        <p>Hello and welcome to this custom menu item</p>
     </div>
 </body>
 </html>
